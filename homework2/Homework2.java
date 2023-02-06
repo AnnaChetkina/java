@@ -1,8 +1,7 @@
 package homework2;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,13 +19,17 @@ import java.util.Map;
 public class Homework2 {
     public static void main(String[] args) throws Exception {
 
-        String sPath = "C:/GeekBrains 22/intro_to_java/seminars/out/production/seminars/homework2/input.txt";
+        String sPath = "../seminars/homework2/input.txt";
         String sRes = readFile(sPath);
         Map<String, Integer> initNumbers = getNumbersInit(sRes);
         Integer a = initNumbers.get("a");
         Integer b = initNumbers.get("b");
 //        System.out.println(a);
 //        System.out.println(b);
+        if (a == 0 && b == 0) System.out.printf("а = %d, b = %d, ответ: не определено", a, b);
+        else System.out.printf("а = %d, b = %d, ответ: %.2f \n", a, b, getExponentiation(a, b));
+        writeResToFile(Double.toString(getExponentiation(a, b)));
+
 
 
     }
@@ -84,5 +87,22 @@ public class Homework2 {
         String sA = sNum.split("=")[1];
         return Integer.parseInt(sA.trim());
     }
+
+    static Double getExponentiation(Integer a, Integer b) {
+        return (Double) Math.pow(a, b);
+    }
+
+    static void writeResToFile(String res) {
+        File file = new File("../seminars/homework2/output.txt");
+
+        try (PrintWriter out = new PrintWriter(file, StandardCharsets.UTF_8))
+        {
+            out.print(res);
+            System.out.println("Successfully written data to the file");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
