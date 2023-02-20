@@ -11,10 +11,10 @@ public class Homework4 {
     public static int[][] getInitMap() {
         // -1 стена; -2 выход; 1 - исходная позиция
         int[][] initMap = {
-                {0, 0,   0,   0,  0,  0,  0,  0, 0},
-                {0, -1, -1,  -1,  0,  0,  0,  0, 0},
+                {0,  0,  0,   0,  0,  0,  0,  0, 0},
+                {0, -1, -1,  -1,  0,  0,  0,  0, -2},
                 {0,  0,  0,   0, -1,  0,  0,  0, 0},
-                {0,  0,  0,  -1, -1, -1,  0,  0, 0},
+                {0,  0, -1,  -1, -1, -1,  0,  0, 0},
                 {0,  0,  1,  -1,  0,  0, -1,  0, 0},
                 {0,  0,  0,  -1,  0,  0, -1,  0, 0},
                 {0,  0,  0,  -1,  0,  0, -1, -1, 0},
@@ -22,12 +22,13 @@ public class Homework4 {
                 {0,  0,  0,   0,  0,  0, -2,  0, 0},
         };
 
-//        int[][] intMap = {
-//                {4, 6, 10},
-//                {40, 69, 0}
+//        int[][] initMap = {
+//                {0,  0,  0,   0,  0},
+//                {0,  -1,  -1,   0,  0},
+//                {0,  0,  -1,   -1,  0},
+//                {0,  1,  0,   0,  0},
+//                {0,  0,  0,   -2,  0},
 //        };
-        // 4 6 10 40 69 0 / i - это колонки, j - стрки
-//        System.out.println(intMap[1][1]);
         return initMap;
     }
 
@@ -45,19 +46,17 @@ public class Homework4 {
         }
     }
 
-
-    public static void wave(int[][] arr) {
+        public static void wave(int[][] arr) {
         System.out.println("изначальная карта");
         PrintMap(arr);
+        // todo uncomment
         // начальная позиция, x = row, y = col
         int initX = 4;
         int initY = 2;
+
         Queue<Integer> queue = new LinkedList<Integer>();
         int k = posToСoefficient(initX, initY);
         queue.add(k); // добавяем начальную точку в очередь
-
-//        System.out.println(queue);
-//        System.out.println(queue.size() - 1);
 
         int width = arr[0].length; // cols
         int height = arr[1].length; // rows
@@ -66,44 +65,54 @@ public class Homework4 {
             Map<String, Integer> coordinates = сoefficientToPos(queue.remove());
             Integer row = coordinates.get("row");
             Integer col = coordinates.get("col");
-            System.out.println(row);
-            System.out.println(col);
-            System.out.println("***********");
+            System.out.printf("позиция: row = %d, col = %d;", row, col);
+            System.out.println();
+            System.out.print("очередь после извлечения элемента ");
+            System.out.println(queue);
 
-            if (row > 0 && col > 0 && row < width && col < height){
 
-                if (row > 0 && arr[row - 1][col] == 0) {
+            int step = arr[row][col] + 1;
+//            System.out.println(step);
+
+
+            if (row > 0 && arr[row - 1][col] == 0) {
                     queue.add(posToСoefficient(row - 1, col));
-                    arr[row - 1][col] = arr[row][col] + 1;
-                    System.out.printf("1: row = %d, col = %d ;", row - 1, col);
+                    arr[row - 1][col] = step;
+                    System.out.printf("1. шаг вверх: row = %d, col = %d;", row - 1, col);
                     System.out.println();
                 }
 
                 if (col < height - 1 && arr[row][col + 1] == 0) {
                     queue.add(posToСoefficient(row, col + 1));
-                    arr[row][col + 1] = arr[row][col] + 1;
-                    System.out.printf("2: row = %d, col = %d ;", row, col + 1);
+                    arr[row][col + 1] = step;
+                    System.out.printf("2. шаг вправо: row = %d, col = %d ;", row, col + 1);
                     System.out.println();
                 }
 
                 if (row < width - 1 && arr[row + 1][col] == 0) {
                     queue.add(posToСoefficient(row + 1, col));
-                    arr[row + 1][col] = arr[row][col] + 1;
-                    System.out.printf("3: row = %d, col = %d ;", row + 1, col);
+                    arr[row + 1][col] = step;
+                    System.out.printf("3. шаг вниз: row = %d, col = %d;", row + 1, col);
                     System.out.println();
                 }
 
                 if (col > 0 && arr[row][col - 1] == 0) {
                     queue.add(posToСoefficient(row, col - 1));
-                    arr[row][col - 1] = arr[row][col] + 1;
-                    System.out.printf("4: row = %d, col = %d ;", row, col - 1);
+                    arr[row][col - 1] = step;
+                    System.out.printf("4. шаг влево: row = %d, col = %d;", row, col - 1);
                     System.out.println();
                 }
-            }
+            System.out.print("очередь после возможного добавления элементов ");
+            System.out.println(queue);
 
+            System.out.println("результат распространения волны на данном шаге");
+            System.out.println("************");
             PrintMap(arr);
-            System.out.println("++++++++++");
+            System.out.println("************");
         }
+
+
+
 //        return arr;
     }
 
