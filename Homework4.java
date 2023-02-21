@@ -34,7 +34,7 @@ public class Homework4 {
     }
 
     public static int[] setExit(int[][] map) {
-        int exitX = 0;
+        int exitX = 8;
         int exitY = 6;
         int [] exitCoordinates = {exitX, exitY};
         return exitCoordinates;
@@ -66,7 +66,24 @@ public class Homework4 {
         printMap(map);
     }
 
-        public static int[][] wavePropogation(int[][] arr) {
+    public static void printPosAndQueue(int row, int col, Queue<Integer> queue) {
+        System.out.printf("позиция: row = %d, col = %d;", row, col);
+        System.out.println();
+        System.out.print("очередь после извлечения элемента ");
+        System.out.println(queue);
+    }
+
+    public static void printQueueAndMap(int[][] arr, Queue<Integer> queue) {
+        System.out.print("очередь после возможного добавления элементов ");
+        System.out.println(queue);
+        System.out.println("результат распространения волны на данном шаге");
+        System.out.println("************");
+        printMap(arr);
+        System.out.println("************");
+    }
+
+
+    public static int[][] wavePropogation(int[][] arr) {
         System.out.println("изначальная карта");
         printMap(arr);
         // начальная позиция, x = row, y = col
@@ -84,50 +101,57 @@ public class Homework4 {
             Map<String, Integer> coordinates = сoefficientToPos(queue.remove());
             Integer row = coordinates.get("row");
             Integer col = coordinates.get("col");
-            System.out.printf("позиция: row = %d, col = %d;", row, col);
-            System.out.println();
-            System.out.print("очередь после извлечения элемента ");
-            System.out.println(queue);
+            printPosAndQueue(row, col,queue);
+
             int step = arr[row][col] + 1;
 
             if (row > 0 && arr[row - 1][col] == 0) {
-                queue.add(posToСoefficient(row - 1, col));
-                arr[row - 1][col] = step;
-                System.out.printf("1. шаг вверх: row = %d, col = %d;", row - 1, col);
-                System.out.println();
+                move(arr, queue, row - 1, col, step,"1. шаг вверх: ");
             }
 
             if (col < height - 1 && arr[row][col + 1] == 0) {
-                queue.add(posToСoefficient(row, col + 1));
-                arr[row][col + 1] = step;
-                System.out.printf("2. шаг вправо: row = %d, col = %d ;", row, col + 1);
-                System.out.println();
+                move(arr, queue, row, col + 1, step,"2. шаг вправо: ");
             }
 
             if (row < width - 1 && arr[row + 1][col] == 0) {
-                queue.add(posToСoefficient(row + 1, col));
-                arr[row + 1][col] = step;
-                System.out.printf("3. шаг вниз: row = %d, col = %d;", row + 1, col);
-                System.out.println();
+                move(arr, queue, row + 1, col, step,"3. шаг вниз: ");
             }
 
             if (col > 0 && arr[row][col - 1] == 0) {
-                queue.add(posToСoefficient(row, col - 1));
-                arr[row][col - 1] = step;
-                System.out.printf("4. шаг влево: row = %d, col = %d;", row, col - 1);
-                System.out.println();
+                move(arr, queue, row, col - 1, step,"4. шаг влево: ");
             }
 
-            System.out.print("очередь после возможного добавления элементов ");
-            System.out.println(queue);
-
-            System.out.println("результат распространения волны на данном шаге");
-            System.out.println("************");
-            printMap(arr);
-            System.out.println("************");
+            printQueueAndMap(arr, queue);
         }
         return arr;
     }
+
+    public static void move(int[][]arr, Queue<Integer> queue, int row, int col, int step, String txt) {
+        queue.add(posToСoefficient(row, col));
+        arr[row][col] = step;
+        System.out.printf(txt + "row = %d, col = %d;", row, col);
+        System.out.println();
+//        return new Pair(queue, arr);
+    }
+
+    //todo del
+//    private static class Pair {
+//        private Queue<Integer> queue;
+//        private int[][] arr;
+//
+//        Pair(Queue<Integer> queue, int[][] arr) {
+//            this.queue = queue;
+//            this.arr = arr;
+//        }
+//
+//        Queue<Integer> getQueue() {
+//            return queue;
+//        }
+//
+//        int[][] getArr() {
+//            return arr;
+//        }
+//    }
 
     public static Queue<Integer> restoringPath(int[][] arr, int iniX, int initY) {
 
@@ -135,8 +159,6 @@ public class Homework4 {
 
         int width = arr[0].length; // cols
         int height = arr[1].length; // rows
-
-        // пока рассматривается ситуация, что путь выход 1
 //
         int [] exitCoordinates = setExit(arr);
         int currentRow = exitCoordinates[0];
@@ -159,6 +181,7 @@ public class Homework4 {
                 currentCol = currentCol - 1;
                 route.add(posToСoefficient(currentRow, currentCol));
             }
+//            route = restore(arr, route, currentRow, currentCol, width, height);
         }
 
         System.out.println("путь = ");
@@ -166,6 +189,26 @@ public class Homework4 {
 
         return route;
     }
+
+//    public static Queue<Integer> restore(int[][]arr, Queue<Integer> route, int currentRow, int currentCol, int width, int height) {
+//        if (currentRow > 0 && arr[currentRow - 1][currentCol] == arr[currentRow][currentCol] - 1) {
+//            currentRow = currentRow - 1;
+//            route.add(posToСoefficient(currentRow, currentCol));
+//        }
+//        if (currentCol < height - 1 && arr[currentRow][currentCol + 1] == arr[currentRow][currentCol] - 1) {
+//            currentCol = currentCol + 1;
+//            route.add(posToСoefficient(currentRow, currentCol));
+//        }
+//        if (currentRow < width - 1 && arr[currentRow + 1][currentCol] == arr[currentRow][currentCol] - 1) {
+//            currentRow = currentRow + 1;
+//            route.add(posToСoefficient(currentRow, currentCol));
+//        }
+//        if (currentCol > 0 && arr[currentRow][currentCol - 1] == arr[currentRow][currentCol] - 1) {
+//            currentCol = currentCol - 1;
+//            route.add(posToСoefficient(currentRow, currentCol));
+//        }
+//        return route;
+//    }
 
     // преобразователь координат для записи в очередь
     public static int posToСoefficient(int row, int col) {
