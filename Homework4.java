@@ -3,6 +3,7 @@ import java.util.*;
 public class Homework4 {
     public static void main(String[] args) {
         int[][] wave = wavePropogation(getInitMap());
+//        Queue<Integer> route = restoringPath(wave, 3, 1);
         Queue<Integer> route = restoringPath(wave, 4, 2);
         printPath(wave, route);
     }
@@ -36,6 +37,10 @@ public class Homework4 {
     public static int[] setExit(int[][] map) {
         int exitX = 8;
         int exitY = 6;
+        if (exitX > map[0].length || exitY > map[1].length){
+            exitX = 0;
+            exitY = 0;
+        }
         int [] exitCoordinates = {exitX, exitY};
         return exitCoordinates;
     }
@@ -89,6 +94,8 @@ public class Homework4 {
         // начальная позиция, x = row, y = col
         int initX = 4;
         int initY = 2;
+//        int initX = 3;
+//        int initY = 1;
 
         Queue<Integer> queue = new LinkedList<Integer>();
         int k = posToСoefficient(initX, initY);
@@ -131,27 +138,7 @@ public class Homework4 {
         arr[row][col] = step;
         System.out.printf(txt + "row = %d, col = %d;", row, col);
         System.out.println();
-//        return new Pair(queue, arr);
     }
-
-    //todo del
-//    private static class Pair {
-//        private Queue<Integer> queue;
-//        private int[][] arr;
-//
-//        Pair(Queue<Integer> queue, int[][] arr) {
-//            this.queue = queue;
-//            this.arr = arr;
-//        }
-//
-//        Queue<Integer> getQueue() {
-//            return queue;
-//        }
-//
-//        int[][] getArr() {
-//            return arr;
-//        }
-//    }
 
     public static Queue<Integer> restoringPath(int[][] arr, int iniX, int initY) {
 
@@ -159,12 +146,15 @@ public class Homework4 {
 
         int width = arr[0].length; // cols
         int height = arr[1].length; // rows
-//
         int [] exitCoordinates = setExit(arr);
         int currentRow = exitCoordinates[0];
         int currentCol = exitCoordinates[1];
+        System.out.printf("координаты выхода row = %d, col = %d; ", currentRow, currentCol);
+        System.out.println();
 
         while (currentRow != iniX || currentCol != initY) {
+//            System.out.println("while cycle");
+
             if (currentRow > 0 && arr[currentRow - 1][currentCol] == arr[currentRow][currentCol] - 1) {
                 currentRow = currentRow - 1;
                 route.add(posToСoefficient(currentRow, currentCol));
@@ -181,34 +171,10 @@ public class Homework4 {
                 currentCol = currentCol - 1;
                 route.add(posToСoefficient(currentRow, currentCol));
             }
-//            route = restore(arr, route, currentRow, currentCol, width, height);
         }
-
-        System.out.println("путь = ");
-        System.out.println(route);
-
+        System.out.println("путь = " + route);
         return route;
     }
-
-//    public static Queue<Integer> restore(int[][]arr, Queue<Integer> route, int currentRow, int currentCol, int width, int height) {
-//        if (currentRow > 0 && arr[currentRow - 1][currentCol] == arr[currentRow][currentCol] - 1) {
-//            currentRow = currentRow - 1;
-//            route.add(posToСoefficient(currentRow, currentCol));
-//        }
-//        if (currentCol < height - 1 && arr[currentRow][currentCol + 1] == arr[currentRow][currentCol] - 1) {
-//            currentCol = currentCol + 1;
-//            route.add(posToСoefficient(currentRow, currentCol));
-//        }
-//        if (currentRow < width - 1 && arr[currentRow + 1][currentCol] == arr[currentRow][currentCol] - 1) {
-//            currentRow = currentRow + 1;
-//            route.add(posToСoefficient(currentRow, currentCol));
-//        }
-//        if (currentCol > 0 && arr[currentRow][currentCol - 1] == arr[currentRow][currentCol] - 1) {
-//            currentCol = currentCol - 1;
-//            route.add(posToСoefficient(currentRow, currentCol));
-//        }
-//        return route;
-//    }
 
     // преобразователь координат для записи в очередь
     public static int posToСoefficient(int row, int col) {
