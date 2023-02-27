@@ -1,21 +1,19 @@
 package OOP.homework.heroes;
 
-public class Sorcerer extends BaseHero{
-    public Sorcerer(String name) {
-        super(String.format(name + " #%d", ++Sorcerer.number),
-                Sorcerer.r.nextInt(100, 200));
+public class Sorcerer extends Healer{
+    public Sorcerer(String name, int hp) {
+        super(name, hp);
     }
 
-    public Sorcerer() {
-        super(String.format("Hero_Sorcerer #%d", ++Sorcerer.number),
-                Sorcerer.r.nextInt(100, 200));
+    public Sorcerer(String name) {
+        super(name, Crossbowman.r.nextInt(100, 200));
     }
 
     public String getInfo() {
-        return String.format("%s", super.getInfo());
+        return String.format("I am %s", super.getInfo());
     }
-
-    public void castSpell(){
-        System.out.println(this.name + " cast a spell");
-    }
+//    public void castSpell(){
+//        System.out.println(this.name + " cast a spell");
+//    }
 }
+

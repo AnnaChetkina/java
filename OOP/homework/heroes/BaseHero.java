@@ -1,19 +1,19 @@
 package OOP.homework.heroes;
 
+import OOP.homework.BaseHeroInterface;
+
 import java.util.Random;
 
-public class BaseHero {
-    protected static int number;
+public abstract class BaseHero implements BaseHeroInterface {
+    protected static int heroId;
     protected static Random r;
 
     protected String name;
     protected int hp;
     protected int maxHp;
 
-//    protected int attack;
-
     static {
-        BaseHero.number = 0;
+        BaseHero.heroId = 0;
         BaseHero.r = new Random();
     }
 
@@ -21,17 +21,16 @@ public class BaseHero {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
-//        this.attack = attack;
+        heroId++;
     }
 
-    public BaseHero() {
-        this(String.format("Base_Hero #%d", ++BaseHero.number),
-                BaseHero.r.nextInt(100, 200));
+    public BaseHero(String name) {
+        this(name, BaseHero.r.nextInt(100, 200));
     }
 
     public String getInfo() {
-        return String.format("Name: %s  Hp: %d  Type: %s",
-                this.name, this.hp, this.getClass().getSimpleName());
+        return String.format("%s #%d, my name is %s",
+                this.getClass().getSimpleName(), BaseHero.heroId, this.name);
     }
 
     public void GetHealed(int Hp) {
@@ -52,6 +51,10 @@ public class BaseHero {
 
     public String getName() {
         return name;
+    }
+
+    public void step(){
+
     }
 }
 

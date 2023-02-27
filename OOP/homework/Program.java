@@ -1,12 +1,11 @@
-// Крестьянин, разбойник, снайпер, колдун, копейщик, арбалетчик, монах. Для каждого сформировать список свойств и возможных действий.
-// Напрнимер свойство скорость, действие нанести удар. Проанализировать получившиеся свойства и действия персонажей
-// и создать Обобщённый класс описывающий свойства и действия имеющиеся у всех персонажей. Создать этот класс.
-// Создать классы для каждого типа персонажей наследующие и расширяющие абстрактный(обобщённый) класс.
-// В основной программе создать по одному экземпляру каждого типа персонажей.
 
 package OOP.homework;
 
 import OOP.homework.heroes.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Program {
     public static void main(String[] args) {
@@ -14,52 +13,44 @@ public class Program {
     }
 
     public static void createHeroes(){
-        // Крестьянин
-        Peasant peasant = new Peasant();
-        System.out.println(peasant.getInfo());
-        peasant.plowField();
-        System.out.println("------");
-        // Peasant
-        Rogue rogue= new Rogue();
-        System.out.println(rogue.getInfo());
-        rogue.steal();
-        System.out.println("------");
-        int peasantDamage = rogue.Attack(peasant);
-        System.out.printf("%s attacked %s with %d points", rogue.getName(), peasant.getName(), peasantDamage);
-        System.out.println();
-        peasant.GetHealed(10);
-        System.out.println("Info about " + peasant.getName() + " after healing");
-        System.out.println(peasant.getInfo());
-        System.out.println("------");
+        int teamCount = 10;
+        Random rand = new Random();
 
-        // Снайпер
-        Sniper sniper = new Sniper();
-        System.out.println(sniper.getInfo());
-        sniper.shootBullet();
-        System.out.println("------");
+        List<BaseHero> team = new ArrayList<>();
+        for (int i = 0; i < teamCount; i++) {
+            int val = rand.nextInt(4);
+            switch (val) {
+                case 0: // Крестьянин
+                    team.add(new Peasant(getName()));
+                    break;
+                case 1:  // разбойник
+                    team.add(new Rogue(getName()));
+                    break;
+                case 2:  // Снайпер
+                    team.add(new Sniper(getName()));
+                    break;
+                case 3:         // колдун
+                    team.add(new Sorcerer(getName()));
+                    break;
+                case 4:         // копейщик
+                    team.add(new Spearman(getName()));
+                    break;
+                case 5:         // арбалетчик
+                    team.add(new Crossbowman(getName()));
+                    break;
+                case 6:         // монах
+                    team.add(new Monk(getName()));
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        // колдун
-        Sorcerer sorcerer = new Sorcerer();
-        System.out.println(sorcerer.getInfo());
-        sorcerer.castSpell();
-        System.out.println("------");
+        team.forEach(hero -> System.out.println(hero.getInfo()));
+    }
 
-        // копейщик
-        Spearman spearman = new Spearman();
-        System.out.println(spearman.getInfo());
-        spearman.throwSpear();
-        System.out.println("------");
-
-        // арбалетчик
-        Crossbowman crossbowman = new Crossbowman();
-        System.out.println(crossbowman.getInfo());
-        crossbowman.shootArrow();
-        System.out.println("------");
-
-        // монах
-        Monk monk = new Monk();
-        System.out.println(monk.getInfo());
-        monk.pray();
+    private static String getName(){
+        return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
     }
 
 }
