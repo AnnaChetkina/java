@@ -49,12 +49,16 @@ public abstract class BaseHero implements BaseHeroInterface {
         return damage;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void step(){
 
+    }
+
+    public int getHeroId() {
+        return heroId;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

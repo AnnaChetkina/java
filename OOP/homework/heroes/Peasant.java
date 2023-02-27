@@ -13,6 +13,10 @@ public class Peasant extends BaseHero{
         return String.format("I am %s", super.getInfo());
     }
 
+    public int getHeroId() {
+        return heroId;
+    }
+
 //    public void plowField(){
 //        System.out.println(this.name + " plowed the field");
 //    }

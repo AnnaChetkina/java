@@ -17,6 +17,7 @@ public class Program {
         Random rand = new Random();
 
         List<BaseHero> team = new ArrayList<>();
+
         for (int i = 0; i < teamCount; i++) {
             int val = rand.nextInt(4);
             switch (val) {
@@ -44,9 +45,16 @@ public class Program {
                 default:
                     break;
             }
+            System.out.println(team.get(i).getInfo());
+        }
+        System.out.println("------------");
+
+        for (int i = 0; i < teamCount; i++) {
+            System.out.println(team.get(i).getInfo());
+            System.out.println(team.get(i).getHeroId());
         }
 
-        team.forEach(hero -> System.out.println(hero.getInfo()));
+//        team.forEach(hero -> System.out.println(hero.getInfo()));
     }
 
     private static String getName(){
