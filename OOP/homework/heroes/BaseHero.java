@@ -5,7 +5,7 @@ import OOP.homework.BaseHeroInterface;
 import java.util.Random;
 
 public abstract class BaseHero implements BaseHeroInterface {
-    protected static int heroId;
+    protected static int heroCnt ;
     protected static Random r;
 
     protected String name;
@@ -13,7 +13,7 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected int maxHp;
 
     static {
-        BaseHero.heroId = 0;
+        BaseHero.heroCnt  = 0;
         BaseHero.r = new Random();
     }
 
@@ -21,7 +21,7 @@ public abstract class BaseHero implements BaseHeroInterface {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
-        heroId++;
+        heroCnt ++;
     }
 
     public BaseHero(String name) {
@@ -29,8 +29,8 @@ public abstract class BaseHero implements BaseHeroInterface {
     }
 
     public String getInfo() {
-        return String.format("%s #%d, my name is %s",
-                this.getClass().getSimpleName(), BaseHero.heroId, this.name);
+        return String.format("%s, my name is %s",
+                this.getClass().getSimpleName(), this.name);
     }
 
     public void GetHealed(int Hp) {
@@ -53,8 +53,8 @@ public abstract class BaseHero implements BaseHeroInterface {
 
     }
 
-    public int getHeroId() {
-        return heroId;
+    protected int getheroCnt () {
+        return heroCnt ;
     }
 
     public String getName() {
