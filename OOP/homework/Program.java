@@ -53,6 +53,7 @@ public class Program {
             System.out.println(team.get(i).getInfo());
         }
 
+
 //        team.forEach(hero -> System.out.println(hero.getInfo()));
     }
 

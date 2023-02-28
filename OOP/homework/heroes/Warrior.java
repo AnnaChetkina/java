@@ -1,12 +1,12 @@
 package OOP.homework.heroes;
 
 public class Warrior extends BaseHero{
-    public Warrior(String name, int hp) {
-        super(name, hp);
+    public Warrior(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
+        super(attack, defense, maxDamage, minDamage, hp, speed, name);
     }
 
     public Warrior(String name) {
-        super(name);
+        this(0, 0, 0, 0, 0, 0, name);
     }
 
     public String getInfo() {

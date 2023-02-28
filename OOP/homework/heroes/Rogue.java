@@ -2,14 +2,13 @@ package OOP.homework.heroes;
 
 public class Rogue extends Warrior{
     int id;
-    public Rogue(String name, int hp) {
-        super(name, hp);
+    public Rogue(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
+        super(attack, defense, maxDamage, minDamage, hp, speed, name);
         this.id = super.getheroCnt();
     }
 
     public Rogue(String name) {
-        super(name, Crossbowman.r.nextInt(100, 200));
-        this.id = super.getheroCnt();
+        this(8, 3, 4, 2 ,10 ,6, name);
     }
 
     public String getInfo() {

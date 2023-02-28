@@ -2,14 +2,14 @@ package OOP.homework.heroes;
 
 public class Sorcerer extends Healer{
     int id;
-    public Sorcerer(String name, int hp) {
-        super(name, hp);
+
+    public Sorcerer(int attack, int defense, int maxDamage, int minDamage, int hp, int speed,  int magic, String name) {
+        super(attack, defense, maxDamage, minDamage, hp, speed, magic, name);
         this.id = super.getheroCnt();
     }
 
     public Sorcerer(String name) {
-        super(name, Crossbowman.r.nextInt(100, 200));
-        this.id = super.getheroCnt();
+        this(17, 12,-5, -5, 30, 9, 1, name);
     }
 
     public String getInfo() {

@@ -8,24 +8,47 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected static int heroCnt ;
     protected static Random r;
 
-    protected String name;
-    protected int hp;
+//    атака attack
+//    защита defense
+//    выстрелы shots
+//    урон damage - maxDamage minDamage
+//    здоровье health
+//    скорость speed
+//    доставка delivery
+//    магия magic
+//    имя
+
+
+
     protected int maxHp;
+
+    protected int attack;
+    protected int defense;
+    protected int maxDamage;
+    protected int minDamage;
+    protected int hp;
+    protected int speed;
+    protected String name;
+//    protected int health;
 
     static {
         BaseHero.heroCnt  = 0;
         BaseHero.r = new Random();
     }
 
-    public BaseHero(String name, int hp) {
+    public BaseHero(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
+        this.attack = attack;
+        this.defense = defense;
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
+        this.hp = hp; // health
+        this.speed = speed;
         this.name = name;
-        this.hp = hp;
-        this.maxHp = hp;
         heroCnt ++;
     }
 
     public BaseHero(String name) {
-        this(name, BaseHero.r.nextInt(100, 200));
+        this(0, 0, 0, 0, 0, 0, name);
     }
 
     public String getInfo() {

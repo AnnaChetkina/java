@@ -2,16 +2,14 @@ package OOP.homework.heroes;
 
 public class Spearman extends BaseHero{
     int id;
-    public Spearman(String name, int hp) {
-        super(name, hp);
+    public Spearman(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
+        super(attack, defense, maxDamage, minDamage, hp, speed, name);
         this.id = super.getheroCnt();
     }
 
     public Spearman(String name) {
-        super(name, Crossbowman.r.nextInt(100, 200));
-        this.id = super.getheroCnt();
+        this(4, 5, 3, 1 ,10 ,4, name);
     }
-
     public String getInfo() {
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }

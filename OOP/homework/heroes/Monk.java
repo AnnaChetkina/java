@@ -1,15 +1,14 @@
 package OOP.homework.heroes;
 
 public class Monk extends Healer{
-    int id;
-    public Monk(String name, int hp) {
-        super(name, hp);
+    int id; // todo спецификатор!
+    public Monk(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, int magic, String name) {
+        super(attack, defense, maxDamage, minDamage, hp, speed, magic, name);
         this.id = super.getheroCnt();
     }
 
     public Monk(String name) {
-        super(name, Crossbowman.r.nextInt(100, 200));
-        this.id = super.getheroCnt();
+        this(12, 7,-4, -4, 30, 5, 1, name);
     }
 
     public String getInfo() {
