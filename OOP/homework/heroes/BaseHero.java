@@ -18,8 +18,6 @@ public abstract class BaseHero implements BaseHeroInterface {
 //    магия magic
 //    имя
 
-
-
     protected int maxHp;
 
     protected int attack;
@@ -29,7 +27,6 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected int hp;
     protected int speed;
     protected String name;
-//    protected int health;
 
     static {
         BaseHero.heroCnt  = 0;
@@ -47,9 +44,9 @@ public abstract class BaseHero implements BaseHeroInterface {
         heroCnt ++;
     }
 
-    public BaseHero(String name) {
-        this(0, 0, 0, 0, 0, 0, name);
-    }
+//    public BaseHero(String name) {
+//        this(0, 0, 0, 0, 0, 0, name);
+//    }
 
     public String getInfo() {
         return String.format("%s, my name is %s",
@@ -82,6 +79,14 @@ public abstract class BaseHero implements BaseHeroInterface {
 
     public String getName() {
         return name;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getHp() {
+        return hp;
     }
 }
 

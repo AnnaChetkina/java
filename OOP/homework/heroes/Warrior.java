@@ -5,9 +5,9 @@ public class Warrior extends BaseHero{
         super(attack, defense, maxDamage, minDamage, hp, speed, name);
     }
 
-    public Warrior(String name) {
-        this(0, 0, 0, 0, 0, 0, name);
-    }
+//    public Warrior(String name) {
+//        this(0, 0, 0, 0, 0, 0, name);
+//    }
 
     public String getInfo() {
         return super.getInfo();

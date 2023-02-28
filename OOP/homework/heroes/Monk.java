@@ -1,7 +1,7 @@
 package OOP.homework.heroes;
 
 public class Monk extends Healer{
-    int id; // todo спецификатор!
+    private int id;
     public Monk(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, int magic, String name) {
         super(attack, defense, maxDamage, minDamage, hp, speed, magic, name);
         this.id = super.getheroCnt();

@@ -1,7 +1,7 @@
 package OOP.homework.heroes;
 
 public class Spearman extends BaseHero{
-    int id;
+    private int id;
     public Spearman(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
         super(attack, defense, maxDamage, minDamage, hp, speed, name);
         this.id = super.getheroCnt();

@@ -1,7 +1,7 @@
 package OOP.homework.heroes;
 
 public class Rogue extends Warrior{
-    int id;
+    private int id;
     public Rogue(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
         super(attack, defense, maxDamage, minDamage, hp, speed, name);
         this.id = super.getheroCnt();

@@ -8,9 +8,9 @@ public abstract class Healer extends BaseHero {
         this.magic = magic;
     }
 
-    public Healer(String name) {
-        this(0, 0, 0, 0, 0, 0, 0, name);
-    }
+//    public Healer(String name) {
+//        this(0, 0, 0, 0, 0, 0, 0, name);
+//    }
 
     public String getInfo() {
         return super.getInfo();

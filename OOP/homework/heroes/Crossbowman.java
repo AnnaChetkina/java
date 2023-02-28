@@ -1,7 +1,7 @@
 package OOP.homework.heroes;
 
 public class Crossbowman extends Shooter{
-    int id;
+    private int id;
     public Crossbowman(int attack, int defense, int shots, int maxDamage, int minDamage, int hp, int speed, String name) {
         super(attack, defense, shots, maxDamage, minDamage, hp, speed, name);
         this.id = super.getheroCnt();
