@@ -19,16 +19,14 @@ public abstract class Shooter extends BaseHero{
         return side;
     }
 
+    public int step(List<BaseHero> side1, List<BaseHero> side2){
+        System.out.println("my side is "+ this.getSide());
 
-
-    public int step(List<BaseHero> side1, List<BaseHero> side2, String type){
-
-        super.step();
 //        Если жизнь равна нулю или стрел нет, завершить обработку.
         if (this.hp <= 0 && this.shots <= 0) return 0;
 
         List<BaseHero> mySide, enemySide;
-        if (type == "light") {
+        if (this.getSide() == "light") {
             mySide = side1;
             enemySide = side2;
         } else {

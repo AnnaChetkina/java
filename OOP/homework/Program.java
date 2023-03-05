@@ -32,7 +32,7 @@ public class Program {
         for (int i = 0; i < waitingList.size() ; i++){
             if (waitingList.get(i) instanceof Shooter) {
                 System.out.println(waitingList.get(i).getInfo());
-                ((Shooter)waitingList.get(i)).step(ligthSideTeam, darkSideTeam, "light");
+                ((Shooter)waitingList.get(i)).step(ligthSideTeam, darkSideTeam);
                 System.out.println("------------");
             }
         }
