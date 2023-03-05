@@ -19,7 +19,10 @@ public class Peasant extends BaseHero{
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
 
-//    public void plowField(){
+    public int getId() {
+        return this.id;
+    }
+    //    public void plowField(){
 //        System.out.println(this.name + " plowed the field");
 //    }
 }

@@ -28,12 +28,14 @@ public class Program {
         waitingList.forEach(n -> System.out.println(n.getInfo() + " speed: " + n.getSpeed() + " hp: " + n.getHp()));
 
         System.out.println("------------");
-        Crossbowman c = new Crossbowman(getName(), 0, 0);
-        c.step(ligthSideTeam, darkSideTeam, "light");
-        System.out.println("------------");
-        Sniper s = new Sniper(getName(), 0, 0);
-        s.step(ligthSideTeam, darkSideTeam, "light");
 
+        for (int i = 0; i < waitingList.size() ; i++){
+            if (waitingList.get(i) instanceof Shooter) {
+                System.out.println(waitingList.get(i).getInfo());
+                ((Shooter)waitingList.get(i)).step(ligthSideTeam, darkSideTeam, "light");
+                System.out.println("------------");
+            }
+        }
     }
 
     private static List<BaseHero> createLightSide(int teamCount){

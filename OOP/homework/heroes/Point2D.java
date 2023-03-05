@@ -9,10 +9,6 @@ public class Point2D {
         this.y = y;
     }
 
-//    public double getDistance(Point2D pointA, Point2D pointB) {
-//        return Math.sqrt(Math.pow(pointA.x - pointB.x, 2) + Math.pow(pointA.y - pointB.y, 2));
-//    }
-
     public double getDistance(Point2D pointB) {
         return Math.sqrt(Math.pow(this.x - pointB.x, 2) + Math.pow(this.y - pointB.y, 2));
     }

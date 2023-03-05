@@ -19,13 +19,11 @@ public abstract class Shooter extends BaseHero{
         return side;
     }
 
-    //    3.1 Если жизнь равна нулю или стрел нет, завершить оьработку. +
-//            3.2 Поиск среди противников наиболее приближённого. +
-// 3.3 Нанести среднее повреждение найденному противнику.
-// 3.4 Найти среди своих крестьянина.
-//            3.5 Если найден завершить метод иначе уменьшить запас стрел на одну.\
+
+
     public int step(List<BaseHero> side1, List<BaseHero> side2, String type){
 
+        super.step();
 //        Если жизнь равна нулю или стрел нет, завершить обработку.
         if (this.hp <= 0 && this.shots <= 0) return 0;
 
@@ -41,14 +39,14 @@ public abstract class Shooter extends BaseHero{
 //      Поиск среди противников наиболее приближённого.
         double minDistToEnemy = this.point2D.getDistance(enemySide.get(0).getPoint2D());
         int enemyTargetInd = 0;
-        System.out.println(minDistToEnemy);
+//        System.out.println(minDistToEnemy);
         for (int i = 0; i < enemySide.size() ; i++){
             if (this.point2D.getDistance(enemySide.get(i).getPoint2D()) < minDistToEnemy) {
                 minDistToEnemy = this.point2D.getDistance(enemySide.get(i).getPoint2D());
                 enemyTargetInd = i;
             }
         }
-        System.out.println(minDistToEnemy + " " + enemyTargetInd);
+//        System.out.println(minDistToEnemy + " " + enemyTargetInd);
         BaseHero enemyTarget = enemySide.get(enemyTargetInd);
 
 //        Нанести среднее повреждение найденному противнику.
@@ -56,17 +54,19 @@ public abstract class Shooter extends BaseHero{
 
 //        Найти среди своих крестьянина.
         BaseHero myPeasant = null;
-        System.out.println(myPeasant);
+//        System.out.println(myPeasant);
         for (int i = 0; i < mySide.size() ; i++){
             if (mySide.get(i) instanceof Peasant) {
                 myPeasant = mySide.get(i);
+                System.out.println("found peasant "+ myPeasant.getName());
+
             }
         }
 //        Если найден завершить метод иначе уменьшить запас стрел на одну.
-        System.out.println(this.shots);
+        System.out.println("shots before shooter step " + this.shots);
         if (myPeasant != null) {
             this.shots -= 1;
-            System.out.println(this.shots);
+            System.out.println("shots after shooter step " + this.shots);
         } else return 0;
 
         return 1;

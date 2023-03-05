@@ -2,6 +2,7 @@ package OOP.homework.heroes;
 
 import OOP.homework.BaseHeroInterface;
 
+import java.util.List;
 import java.util.Random;
 
 public abstract class BaseHero implements BaseHeroInterface {
@@ -28,7 +29,7 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected int speed;
     protected String name;
     protected Point2D point2D;
-    protected String side;
+    protected String side; // todo пропихнуть во все файлы если нужно
 
     static {
         BaseHero.heroCnt  = 0;
@@ -69,7 +70,6 @@ public abstract class BaseHero implements BaseHeroInterface {
     }
 
     public void step(){
-
     }
 
     protected int getheroCnt () {
@@ -95,5 +95,9 @@ public abstract class BaseHero implements BaseHeroInterface {
     public Point2D getPoint2D() {
         return point2D;
     }
+
+//    public abstract int step(List<BaseHero> side1, List<BaseHero> side2, String type);
+
+//    public abstract int step(List<BaseHero> side1, List<BaseHero> side2, String type);
 }
 
