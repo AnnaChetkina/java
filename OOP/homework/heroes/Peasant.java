@@ -3,15 +3,16 @@ package OOP.homework.heroes;
 public class Peasant extends BaseHero{
     private int id;
     private int delivery;
-//    public Peasant(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, int delivery, String name) {
-    public Peasant(int delivery, String name) {
-        super(1, 1, 1, 1, 1, 3, name);
+
+    //    public Peasant(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, int delivery, String name) {
+    public Peasant(int delivery, String name, int x, int y) {
+        super(1, 1, 1, 1, 1, 3, name, x, y);
         this.delivery = delivery;
         this.id = super.getheroCnt();
     }
 
-    public Peasant(String name) {
-        this(1, name);
+    public Peasant(String name, int x, int y) {
+        this(1, name, x, y);
     }
 
     public String getInfo() {

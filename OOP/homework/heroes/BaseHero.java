@@ -27,13 +27,15 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected int hp;
     protected int speed;
     protected String name;
+    protected Point2D point2D;
+    protected String side;
 
     static {
         BaseHero.heroCnt  = 0;
         BaseHero.r = new Random();
     }
 
-    public BaseHero(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name) {
+    public BaseHero(int attack, int defense, int maxDamage, int minDamage, int hp, int speed, String name, int x, int y) {
         this.attack = attack;
         this.defense = defense;
         this.minDamage = minDamage;
@@ -42,11 +44,8 @@ public abstract class BaseHero implements BaseHeroInterface {
         this.speed = speed;
         this.name = name;
         heroCnt ++;
+        this.point2D = new Point2D(x, y);
     }
-
-//    public BaseHero(String name) {
-//        this(0, 0, 0, 0, 0, 0, name);
-//    }
 
     public String getInfo() {
         return String.format("%s, my name is %s",
@@ -87,6 +86,14 @@ public abstract class BaseHero implements BaseHeroInterface {
 
     public int getHp() {
         return hp;
+    }
+
+    public String getSide() {
+        return side;
+    }
+
+    public Point2D getPoint2D() {
+        return point2D;
     }
 }
 

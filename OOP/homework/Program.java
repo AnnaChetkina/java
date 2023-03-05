@@ -26,6 +26,14 @@ public class Program {
         waitingList.sort(new HeroesComparator());
 
         waitingList.forEach(n -> System.out.println(n.getInfo() + " speed: " + n.getSpeed() + " hp: " + n.getHp()));
+
+        System.out.println("------------");
+        Crossbowman c = new Crossbowman(getName(), 0, 0);
+        c.step(ligthSideTeam, darkSideTeam, "light");
+        System.out.println("------------");
+        Sniper s = new Sniper(getName(), 0, 0);
+        s.step(ligthSideTeam, darkSideTeam, "light");
+
     }
 
     private static List<BaseHero> createLightSide(int teamCount){
@@ -34,20 +42,22 @@ public class Program {
 
         List<BaseHero> team = new ArrayList<>();
 
+        int initX = 0;
+        int initY = 0;
         for (int i = 0; i < teamCount; i++) {
             int val = rand.nextInt(4);
             switch (val) {
                 case 0: // Крестьянин
-                    team.add(new Peasant(getName()));
+                    team.add(new Peasant(getName(), initX++, initY));
                     break;
                 case 1:         // копейщик
-                    team.add(new Spearman(getName()));
+                    team.add(new Spearman(getName(), initX++, initY));
                     break;
                 case 2:         // арбалетчик
-                    team.add(new Crossbowman(getName()));
+                    team.add(new Crossbowman(getName(), initX++, initY));
                     break;
                 case 3:         // монах
-                    team.add(new Monk(getName()));
+                    team.add(new Monk(getName(), initX++, initY));
                     break;
                 default:
                     break;
@@ -62,20 +72,23 @@ public class Program {
 
         List<BaseHero> team = new ArrayList<>();
 
+        int initX = 0;
+        int initY = 9;
+
         for (int i = 0; i < teamCount; i++) {
             int val = rand.nextInt(4);
             switch (val) {
                 case 0: // Крестьянин
-                    team.add(new Peasant(getName()));
+                    team.add(new Peasant(getName(),  initX++, initY));
                     break;
                 case 1:  // разбойник
-                    team.add(new Rogue(getName()));
+                    team.add(new Rogue(getName(),  initX++, initY));
                     break;
                 case 2:  // Снайпер
-                    team.add(new Sniper(getName()));
+                    team.add(new Sniper(getName(),  initX++, initY));
                     break;
                 case 3:         // колдун
-                    team.add(new Sorcerer(getName()));
+                    team.add(new Sorcerer(getName(),  initX++, initY));
                     break;
                 default:
                     break;
