@@ -15,12 +15,12 @@ public class Program {
     }
 
     public static void createHeroes(){
-        System.out.println("------------");
+//        System.out.println("------------");
         List<BaseHero> ligthSideTeam = createLightSide(UNITS);
-        ligthSideTeam.forEach(n -> System.out.println(n.getInfo()));
-        System.out.println("------------");
+//        ligthSideTeam.forEach(n -> System.out.println(n.getInfo()));
+//        System.out.println("------------");
         List<BaseHero> darkSideTeam = createDarkSide(UNITS);
-        darkSideTeam.forEach(n -> System.out.println(n.getInfo()));
+//        darkSideTeam.forEach(n -> System.out.println(n.getInfo()));
         List<BaseHero> waitingList = getWaitingList(ligthSideTeam, darkSideTeam);
         System.out.println("------------");
 

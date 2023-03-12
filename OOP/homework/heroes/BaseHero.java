@@ -2,6 +2,7 @@ package OOP.homework.heroes;
 
 import OOP.homework.BaseHeroInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,6 +30,7 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected int speed;
     protected String name;
     protected Point2D point2D;
+    protected String state;
 
     static {
         BaseHero.heroCnt  = 0;
@@ -45,6 +47,7 @@ public abstract class BaseHero implements BaseHeroInterface {
         this.name = name;
         heroCnt ++;
         this.point2D = new Point2D(x, y);
+        this.state = "Stand";
     }
 
     public String getInfo() {
@@ -71,6 +74,25 @@ public abstract class BaseHero implements BaseHeroInterface {
     public void step(){
     }
 
+    protected int findClosest(List<BaseHero> team){
+        double min = 100;
+        int index = 0;
+        for (int i = 0; i < team.size(); i++){
+            if (min > this.point2D.getDistance(team.get(i).point2D)){
+                index = i;
+                min = this.point2D.getDistance(team.get(i).point2D);
+            }
+        }
+        return index;
+    }
+    protected void getDamage(float damage){
+        this.hp -= damage;
+        if (this.hp <= 0) {
+            this.hp = 0;
+            this.state = "Die";
+        }
+        if (this.hp > this.maxHp) this.hp = maxHp;
+    }
     protected int getheroCnt () {
         return heroCnt ;
     }
@@ -91,8 +113,5 @@ public abstract class BaseHero implements BaseHeroInterface {
         return point2D;
     }
 
-//    public abstract int step(List<BaseHero> side1, List<BaseHero> side2, String type);
-
-//    public abstract int step(List<BaseHero> side1, List<BaseHero> side2, String type);
 }
 
