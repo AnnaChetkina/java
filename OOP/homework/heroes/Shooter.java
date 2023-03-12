@@ -21,7 +21,7 @@ public abstract class Shooter extends BaseHero{
 
 //      Поиск среди противников наиболее приближённого.
         int enemyTargetInd = this.findClosest(enemySide);
-        System.out.println("enemyTargetInd = " + enemyTargetInd);
+//        System.out.println("enemyTargetInd = " + enemyTargetInd);
         BaseHero enemyTarget = enemySide.get(enemyTargetInd);
 
 //        Нанести среднее повреждение найденному противнику.

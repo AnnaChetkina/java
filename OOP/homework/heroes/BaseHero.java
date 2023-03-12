@@ -55,21 +55,15 @@ public abstract class BaseHero implements BaseHeroInterface {
                 this.getClass().getSimpleName(), this.name);
     }
 
-    public void GetHealed(int Hp) {
-        this.hp = Hp + this.hp > this.maxHp ? this.maxHp : Hp + this.hp;
-    }
+//    public void GetHealed(int Hp) {
+//        this.hp = Hp + this.hp > this.maxHp ? this.maxHp : Hp + this.hp;
+//    }
 
-    public void GetDamage(int damage) {
-        if (this.hp - damage > 0) {
-            this.hp -= damage;
-        }
-    }
-
-    public int Attack(BaseHero target) {
-        int damage = BaseHero.r.nextInt(10, 20);
-        target.GetDamage(damage);
-        return damage;
-    }
+//    public int Attack(BaseHero target) {
+//        int damage = BaseHero.r.nextInt(10, 20);
+//        target.getDamage(damage);
+//        return damage;
+//    }
 
     public void step(){
     }
