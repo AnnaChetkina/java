@@ -15,7 +15,4 @@ public class Rogue extends Warrior{
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
 
-//    public void steal(){
-//        System.out.println(this.name + " stole something");
-//    }
 }

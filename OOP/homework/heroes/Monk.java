@@ -8,13 +8,11 @@ public class Monk extends Healer{
     }
 
     public Monk(String name, int x, int y) {
-        this(12, 7,-4, -4, 30, 5, 1, name, x, y);
+        this(12, 7,-4, -4, 30, 5, 10, name, x, y);
     }
 
     public String getInfo() {
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
-//    public void pray(){
-//        System.out.println(this.name + " pray to God");
-//    }
+
 }

@@ -3,10 +3,7 @@ package OOP.homework;
 
 import OOP.homework.heroes.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Program {
     static final int UNITS = 10;
@@ -14,7 +11,7 @@ public class Program {
         createHeroes();
     }
 
-    public static void createHeroes(){
+    public static void createHeroes() {
 //        System.out.println("------------");
         List<BaseHero> ligthSideTeam = createLightSide(UNITS);
 //        ligthSideTeam.forEach(n -> System.out.println(n.getInfo()));
@@ -22,7 +19,7 @@ public class Program {
         List<BaseHero> darkSideTeam = createDarkSide(UNITS);
 //        darkSideTeam.forEach(n -> System.out.println(n.getInfo()));
         List<BaseHero> waitingList = getWaitingList(ligthSideTeam, darkSideTeam);
-        System.out.println("------------");
+//        System.out.println("------------");
 
         waitingList.sort(new HeroesComparator());
 
@@ -30,32 +27,25 @@ public class Program {
 
         System.out.println("------------");
 
-        for (BaseHero hero: waitingList
-             ) {
-            if (ligthSideTeam.contains(hero)) {
-                System.out.println("lightSide");
-                if (hero instanceof Shooter) {
-                    System.out.println(hero.getInfo());
-                    ((Shooter)hero).step(ligthSideTeam, darkSideTeam);
+        Scanner sc = new Scanner(System.in);
+        String stop = "";
+        while (stop.equals("")) {
+            System.out.println("*******");
+            for (BaseHero hero : waitingList) {
+                if (ligthSideTeam.contains(hero)) {
+                    System.out.println("lightSide" + ": " + hero.getInfo());
+                    hero.step(ligthSideTeam, darkSideTeam);
+                    System.out.println("hp = " + hero.getHp() + " state = " + hero.getState());
                     System.out.println("------------");
-                }
-                hero.step();
-            } else {
-                System.out.println("darkSide");
-                if (hero instanceof Shooter) {
-                    System.out.println(hero.getInfo());
-                    ((Shooter)hero).step(darkSideTeam, ligthSideTeam);
+                } else {
+                    System.out.println("darkSide" + ": " + hero.getInfo());
+                    hero.step(darkSideTeam, ligthSideTeam);
+                    System.out.println(" hp = " + hero.getHp() + " state = " + hero.getState());
                     System.out.println("------------");
                 }
             }
+            stop = sc.nextLine();
         }
-//        for (int i = 0; i < waitingList.size() ; i++){
-//            if (waitingList.get(i) instanceof Shooter) {
-//                System.out.println(waitingList.get(i).getInfo());
-//                ((Shooter)waitingList.get(i)).step(ligthSideTeam, darkSideTeam);
-//                System.out.println("------------");
-//            }
-//        }
     }
 
     private static List<BaseHero> createLightSide(int teamCount){

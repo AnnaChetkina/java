@@ -43,6 +43,7 @@ public abstract class BaseHero implements BaseHeroInterface {
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.hp = hp; // health
+        this.maxHp = hp; // health
         this.speed = speed;
         this.name = name;
         heroCnt ++;
@@ -51,13 +52,14 @@ public abstract class BaseHero implements BaseHeroInterface {
     }
 
     public String getInfo() {
-        return String.format("%s, my name is %s",
-                this.getClass().getSimpleName(), this.name);
+        return String.format("%s, my name is %s, hp = %d",
+                this.getClass().getSimpleName(), this.name, this.hp);
     }
 
-//    public void GetHealed(int Hp) {
-//        this.hp = Hp + this.hp > this.maxHp ? this.maxHp : Hp + this.hp;
-//    }
+    public void getHealed(int Hp) {
+        this.hp = Hp + this.hp > this.maxHp ? this.maxHp : Hp + this.hp;
+        if (this.hp > 0) {this.state = "Stand";}
+    }
 
 //    public int Attack(BaseHero target) {
 //        int damage = BaseHero.r.nextInt(10, 20);
@@ -65,19 +67,19 @@ public abstract class BaseHero implements BaseHeroInterface {
 //        return damage;
 //    }
 
-    public void step(){
+    public void step(List<BaseHero> mySide, List<BaseHero> enemySide){
     }
 
-    protected int findClosest(List<BaseHero> team){
+    protected BaseHero findClosest(List<BaseHero> team){
         double min = 100;
-        int index = 0;
+        BaseHero resHero = null;
         for (int i = 0; i < team.size(); i++){
-            if (min > this.point2D.getDistance(team.get(i).point2D)){
-                index = i;
+            if (min > this.point2D.getDistance(team.get(i).point2D) && !team.get(i).getState().equals("Die")){
+                resHero = team.get(i);
                 min = this.point2D.getDistance(team.get(i).point2D);
             }
         }
-        return index;
+        return resHero;
     }
     protected void getDamage(float damage){
         this.hp -= damage;
@@ -86,7 +88,11 @@ public abstract class BaseHero implements BaseHeroInterface {
             this.state = "Die";
         }
         if (this.hp > this.maxHp) this.hp = maxHp;
+//        System.out.println("* hp = " + this.hp);
+//        System.out.println("* maxHp = " + this.maxHp);
+//        System.out.println("* state = " + this.state);
     }
+
     protected int getheroCnt () {
         return heroCnt ;
     }
@@ -107,5 +113,8 @@ public abstract class BaseHero implements BaseHeroInterface {
         return point2D;
     }
 
+    public String getState() {
+        return state;
+    }
 }
 

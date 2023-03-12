@@ -20,13 +20,18 @@ public abstract class Shooter extends BaseHero{
         if (this.state.equals("Die") || this.shots <= 0) return;
 
 //      Поиск среди противников наиболее приближённого.
-        int enemyTargetInd = this.findClosest(enemySide);
-//        System.out.println("enemyTargetInd = " + enemyTargetInd);
-        BaseHero enemyTarget = enemySide.get(enemyTargetInd);
+        BaseHero enemyTarget = this.findClosest(enemySide);
+        if (enemyTarget == null) return;
 
 //        Нанести среднее повреждение найденному противнику.
         float damage = (enemyTarget.defense - attack) > 0 ? minDamage : (enemyTarget.defense - attack) < 0 ? maxDamage : (minDamage + maxDamage) / 2;
         enemyTarget.getDamage(damage);
+        System.out.println("damage to "
+                + enemyTarget.getClass().getSimpleName()
+                + " " + enemyTarget.getName()
+                + "; hp after damage = " + enemyTarget.getHp()
+                + "; state = " + enemyTarget.getState()
+        );
 
 //        Найти среди своих крестьянина.
 //        Если найден завершить метод иначе уменьшить запас стрел на одну.

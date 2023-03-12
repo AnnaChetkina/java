@@ -14,7 +14,4 @@ public class Spearman extends Warrior{
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
 
-//    public void throwSpear(){
-//        System.out.println(this.name + " threw a spear at someone");
-//    }
 }

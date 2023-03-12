@@ -15,7 +15,4 @@ public class Crossbowman extends Shooter{
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
 
-//    public void shootArrow(){
-//        System.out.println(this.name + " fired an arrow");
-//    }
 }

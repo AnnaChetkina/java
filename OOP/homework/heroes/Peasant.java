@@ -1,5 +1,7 @@
 package OOP.homework.heroes;
 
+import java.util.List;
+
 public class Peasant extends BaseHero{
     private int id;
     private int delivery;
@@ -22,7 +24,9 @@ public class Peasant extends BaseHero{
     public int getId() {
         return this.id;
     }
-    //    public void plowField(){
-//        System.out.println(this.name + " plowed the field");
-//    }
+
+    public void step(List<BaseHero> mySide, List<BaseHero> enemySide){
+//        если не труп, то state = "Stand";
+        if (!this.state.equals("Die")) this.state = "Stand";
+    }
 }

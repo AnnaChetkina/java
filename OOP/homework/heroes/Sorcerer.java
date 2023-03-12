@@ -15,8 +15,6 @@ public class Sorcerer extends Healer{
     public String getInfo() {
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
-//    public void castSpell(){
-//        System.out.println(this.name + " cast a spell");
-//    }
+
 }
 

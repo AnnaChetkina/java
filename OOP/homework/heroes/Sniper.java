@@ -15,7 +15,4 @@ public class Sniper extends Shooter {
         return String.format("I am %s (id: %d)", super.getInfo(), this.id);
     }
 
-    //    public void shootBullet(){
-//        System.out.println(this.name + " shoot a bullet");
-//    }
 }
