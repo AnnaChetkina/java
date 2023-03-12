@@ -5,7 +5,6 @@ import java.util.List;
 
 public abstract class Shooter extends BaseHero{
     private int shots;
-    private String side;
     public Shooter(int attack, int defense, int shots, int maxDamage, int minDamage, int hp, int speed, String name, int x, int y) {
         super(attack, defense, maxDamage, minDamage, hp, speed, name, x, y);
         this.shots = shots;
@@ -15,24 +14,9 @@ public abstract class Shooter extends BaseHero{
        return super.getInfo();
     }
 
-    public String getSide() {
-        return side;
-    }
-
-    public int step(List<BaseHero> side1, List<BaseHero> side2){
-        System.out.println("my side is "+ this.getSide());
-
+    public int step(List<BaseHero> mySide, List<BaseHero> enemySide){
 //        Если жизнь равна нулю или стрел нет, завершить обработку.
         if (this.hp <= 0 && this.shots <= 0) return 0;
-
-        List<BaseHero> mySide, enemySide;
-        if (this.getSide() == "light") {
-            mySide = side1;
-            enemySide = side2;
-        } else {
-            mySide = side2;
-            enemySide = side1;
-        }
 
 //      Поиск среди противников наиболее приближённого.
         double minDistToEnemy = this.point2D.getDistance(enemySide.get(0).getPoint2D());

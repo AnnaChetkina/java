@@ -29,7 +29,6 @@ public abstract class BaseHero implements BaseHeroInterface {
     protected int speed;
     protected String name;
     protected Point2D point2D;
-    protected String side; // todo пропихнуть во все файлы если нужно
 
     static {
         BaseHero.heroCnt  = 0;
@@ -86,10 +85,6 @@ public abstract class BaseHero implements BaseHeroInterface {
 
     public int getHp() {
         return hp;
-    }
-
-    public String getSide() {
-        return side;
     }
 
     public Point2D getPoint2D() {

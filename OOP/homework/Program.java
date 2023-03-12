@@ -9,16 +9,17 @@ import java.util.List;
 import java.util.Random;
 
 public class Program {
+    static final int UNITS = 10;
     public static void main(String[] args) {
         createHeroes();
     }
 
     public static void createHeroes(){
         System.out.println("------------");
-        List<BaseHero> ligthSideTeam = createLightSide(10);
+        List<BaseHero> ligthSideTeam = createLightSide(UNITS);
         ligthSideTeam.forEach(n -> System.out.println(n.getInfo()));
         System.out.println("------------");
-        List<BaseHero> darkSideTeam = createDarkSide(10);
+        List<BaseHero> darkSideTeam = createDarkSide(UNITS);
         darkSideTeam.forEach(n -> System.out.println(n.getInfo()));
         List<BaseHero> waitingList = getWaitingList(ligthSideTeam, darkSideTeam);
         System.out.println("------------");
@@ -29,13 +30,32 @@ public class Program {
 
         System.out.println("------------");
 
-        for (int i = 0; i < waitingList.size() ; i++){
-            if (waitingList.get(i) instanceof Shooter) {
-                System.out.println(waitingList.get(i).getInfo());
-                ((Shooter)waitingList.get(i)).step(ligthSideTeam, darkSideTeam);
-                System.out.println("------------");
+        for (BaseHero hero: waitingList
+             ) {
+            if (ligthSideTeam.contains(hero)) {
+                System.out.println("lightSide");
+                if (hero instanceof Shooter) {
+                    System.out.println(hero.getInfo());
+                    ((Shooter)hero).step(ligthSideTeam, darkSideTeam);
+                    System.out.println("------------");
+                }
+                hero.step();
+            } else {
+                System.out.println("darkSide");
+                if (hero instanceof Shooter) {
+                    System.out.println(hero.getInfo());
+                    ((Shooter)hero).step(darkSideTeam, ligthSideTeam);
+                    System.out.println("------------");
+                }
             }
         }
+//        for (int i = 0; i < waitingList.size() ; i++){
+//            if (waitingList.get(i) instanceof Shooter) {
+//                System.out.println(waitingList.get(i).getInfo());
+//                ((Shooter)waitingList.get(i)).step(ligthSideTeam, darkSideTeam);
+//                System.out.println("------------");
+//            }
+//        }
     }
 
     private static List<BaseHero> createLightSide(int teamCount){
