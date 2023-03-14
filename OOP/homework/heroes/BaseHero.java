@@ -116,5 +116,17 @@ public abstract class BaseHero implements BaseHeroInterface {
     public String getState() {
         return state;
     }
+
+    public int[] getCoords() {return new int[]{this.point2D.x, this.point2D.y};}
+
+    @Override
+    public String toString() {
+        return name +
+                " H:" + Math.round(hp) +
+                " D:" + defense +
+                " A:" + attack +
+                " Dmg:" + Math.round(Math.abs((minDamage + maxDamage)/2)) +
+                " " + state;
+    }
 }
 

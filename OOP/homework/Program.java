@@ -7,18 +7,35 @@ import java.util.*;
 
 public class Program {
     static final int UNITS = 10;
+    public static ArrayList<BaseHero> waitingList = new ArrayList<>();
+    public static ArrayList<BaseHero> ligthSideTeam = new ArrayList<>();
+    public static ArrayList<BaseHero> darkSideTeam = new ArrayList<>();
     public static void main(String[] args) {
-        createHeroes();
+        Scanner user_input = new Scanner(System.in);
+        System.out.print("Press Enter to begin.");
+        user_input.nextLine();
+        createLightSide(ligthSideTeam, UNITS);
+        createDarkSide(darkSideTeam, UNITS);
+        createWaitingList(waitingList, ligthSideTeam, darkSideTeam);
+
+        while (true){
+            View.view();
+            user_input.nextLine();
+            for (BaseHero hero: waitingList) {
+                if (ligthSideTeam.contains(hero)) hero.step(ligthSideTeam, darkSideTeam);
+                else hero.step(darkSideTeam, ligthSideTeam);
+            }
+        }
     }
 
     public static void createHeroes() {
 //        System.out.println("------------");
-        List<BaseHero> ligthSideTeam = createLightSide(UNITS);
+        createLightSide(ligthSideTeam, UNITS);
 //        ligthSideTeam.forEach(n -> System.out.println(n.getInfo()));
 //        System.out.println("------------");
-        List<BaseHero> darkSideTeam = createDarkSide(UNITS);
+        createDarkSide(darkSideTeam, UNITS);
 //        darkSideTeam.forEach(n -> System.out.println(n.getInfo()));
-        List<BaseHero> waitingList = getWaitingList(ligthSideTeam, darkSideTeam);
+        createWaitingList(waitingList, ligthSideTeam, darkSideTeam);
 //        System.out.println("------------");
 
         waitingList.sort(new HeroesComparator());
@@ -48,11 +65,11 @@ public class Program {
         }
     }
 
-    private static List<BaseHero> createLightSide(int teamCount){
+    private static List<BaseHero> createLightSide(List<BaseHero> team, int teamCount){
         // копейщик	арбалетчик монах Крестьянин
         Random rand = new Random();
 
-        List<BaseHero> team = new ArrayList<>();
+//        List<BaseHero> team = new ArrayList<>();
 
         int initX = 0;
         int initY = 0;
@@ -78,11 +95,9 @@ public class Program {
         return team;
     }
 
-    private static List<BaseHero> createDarkSide(int teamCount){
+    private static List<BaseHero> createDarkSide(List<BaseHero> team, int teamCount){
         // Крестьянин Разбойник	Снайпер	Колдун
         Random rand = new Random();
-
-        List<BaseHero> team = new ArrayList<>();
 
         int initX = 0;
         int initY = 9;
@@ -109,10 +124,10 @@ public class Program {
         return team;
     }
 
-    private static List<BaseHero> getWaitingList(List<BaseHero> l1, List<BaseHero> l2){
-        List<BaseHero> waitingList = new ArrayList<>(l1);
-        waitingList.addAll(l2);
-        return waitingList;
+    private static List<BaseHero> createWaitingList(List<BaseHero> resList, List<BaseHero> l1, List<BaseHero> l2){
+        resList = new ArrayList<>(l1);
+        resList.addAll(l2);
+        return resList;
     }
 
 

@@ -45,4 +45,15 @@ public abstract class Shooter extends BaseHero{
         this.shots--;
         System.out.println("shots after shooter step " + this.shots);
     }
+
+    @Override
+    public String toString() {
+        return name +
+                " H:" + Math.round(hp) +
+                " D:" + defense +
+                " A:" + attack +
+                " Dmg:" + Math.round(Math.abs((minDamage + maxDamage)/2)) +
+                " Shots:" + shots + " " +
+                state;
+    }
 }
