@@ -28,14 +28,14 @@ public class View {
     }
     private static String getChar(int x, int y){
         String out = "| ";
-        for (BaseHero hero: Program.waitingList) {
-            if (hero.getCoords()[0] == x && hero.getCoords()[1] == y){
-                if (hero.getHp() == 0) {
-                    out = "|" + (AnsiColors.ANSI_RED + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
+        for (BaseHero human: Program.allTeam) {
+            if (human.getCoords()[0] == x && human.getCoords()[1] == y){
+                if (human.getHp() == 0) {
+                    out = "|" + (AnsiColors.ANSI_RED + human.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
-                if (Program.darkSideTeam.contains(hero)) out = "|" + (AnsiColors.ANSI_GREEN + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
-                if (Program.ligthSideTeam.contains(hero)) out = "|" + (AnsiColors.ANSI_BLUE + hero.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
+                if (Program.darkTeam.contains(human)) out = "|" + (AnsiColors.ANSI_GREEN + human.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
+                if (Program.holyTeam.contains(human)) out = "|" + (AnsiColors.ANSI_BLUE + human.getInfo().charAt(0) + AnsiColors.ANSI_RESET);
                 break;
             }
         }
@@ -48,8 +48,7 @@ public class View {
             System.out.print(AnsiColors.ANSI_RED + "Step:" + step + AnsiColors.ANSI_RESET);
         }
         step++;
-//        l[0] = 15;
-        Program.waitingList.forEach((v) -> l[0] = Math.max(l[0], v.toString().length()));
+        Program.allTeam.forEach((v) -> l[0] = Math.max(l[0], v.toString().length()));
         System.out.print("_".repeat(l[0]*2));
         System.out.println("");
         System.out.print(top10 + "    ");
@@ -61,9 +60,9 @@ public class View {
             System.out.print(getChar(1, i));
         }
         System.out.print("|    ");
-        System.out.print(Program.ligthSideTeam.get(0));
-        tabSetter(Program.ligthSideTeam.get(0).toString().length(), l[0]);
-        System.out.println(Program.darkSideTeam.get(0));
+        System.out.print(Program.holyTeam.get(0));
+        tabSetter(Program.holyTeam.get(0).toString().length(), l[0]);
+        System.out.println(Program.darkTeam.get(0));
         System.out.println(midl10);
 
         for (int i = 2; i < 9; i++) {
@@ -71,18 +70,18 @@ public class View {
                 System.out.print(getChar(i, j));
             }
             System.out.print("|    ");
-            System.out.print(Program.ligthSideTeam.get(i - 1));
-            tabSetter(Program.ligthSideTeam.get(i - 1).toString().length(), l[0]);
-            System.out.println(Program.darkSideTeam.get(i - 1));
+            System.out.print(Program.holyTeam.get(i-1));
+            tabSetter(Program.holyTeam.get(i-1).toString().length(), l[0]);
+            System.out.println(Program.darkTeam.get(i-1));
             System.out.println(midl10);
         }
         for (int j = 1; j < 11; j++) {
             System.out.print(getChar(10, j));
         }
         System.out.print("|    ");
-        System.out.print(Program.ligthSideTeam.get(9));
-        tabSetter(Program.ligthSideTeam.get(9).toString().length(), l[0]);
-        System.out.println(Program.darkSideTeam.get(9));
+        System.out.print(Program.holyTeam.get(9));
+        tabSetter(Program.holyTeam.get(9).toString().length(), l[0]);
+        System.out.println(Program.darkTeam.get(9));
         System.out.println(bottom10);
     }
 }
