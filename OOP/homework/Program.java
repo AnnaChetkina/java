@@ -20,15 +20,33 @@ public class Program {
         allTeam.addAll(holyTeam);
         allTeam.addAll(darkTeam);
         sortTeam(allTeam);
+        allTeam.forEach(n -> System.out.println(n.getInfo()));
 
-        while (true){
+        int cntHolyAlive = 0;
+        int cntDarkAlive = 0;
+        boolean bflag = true;
+        while (bflag){
             View.view();
             user_input.nextLine();
+            cntHolyAlive = 0;
+            cntDarkAlive = 0;
             for (BaseHero human: allTeam) {
-                if (holyTeam.contains(human)) human.step(holyTeam, darkTeam);
-                else human.step(darkTeam, holyTeam);
+                if (holyTeam.contains(human)) {
+                    if (human.step(holyTeam, darkTeam)) cntHolyAlive++;
+                }
+                else {
+                    if (human.step(darkTeam, holyTeam)) cntDarkAlive++;
+                }
             }
+            if (cntHolyAlive  == 0 || cntDarkAlive == 0) {
+                bflag = false;
+                System.out.println(cntHolyAlive + " " + cntDarkAlive);
+                darkTeam.forEach(n -> System.out.println(n.getState()));
+            };
         }
+        if (cntHolyAlive == 0) System.out.println("Win dark Team (green)" + " " + cntHolyAlive);
+        if (cntDarkAlive == 0) System.out.println("Win holy Team (blue)" + " " + cntDarkAlive);
+        System.out.println("***Gameover***");
     }
     static void createTeam (ArrayList team, int offset, int posY) {
         for (int i = 0; i < UNITS; i++) {

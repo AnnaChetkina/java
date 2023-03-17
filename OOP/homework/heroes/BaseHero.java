@@ -67,7 +67,8 @@ public abstract class BaseHero implements BaseHeroInterface {
 //        return damage;
 //    }
 
-    public void step(List<BaseHero> mySide, List<BaseHero> enemySide){
+    public boolean step(List<BaseHero> mySide, List<BaseHero> enemySide){
+        return true;
     }
 
     protected BaseHero findClosest(List<BaseHero> team){
@@ -123,8 +124,8 @@ public abstract class BaseHero implements BaseHeroInterface {
     public String toString() {
         return name +
                 " H:" + Math.round(hp) +
-                " D:" + defense +
-                " A:" + attack +
+                " X:" + point2D.x +
+                " Y:" + point2D.y +
                 " Dmg:" + Math.round(Math.abs((minDamage + maxDamage)/2)) +
                 " " + state;
     }

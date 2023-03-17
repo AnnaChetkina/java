@@ -25,8 +25,12 @@ public class Peasant extends BaseHero{
         return this.id;
     }
 
-    public void step(List<BaseHero> mySide, List<BaseHero> enemySide){
+    public boolean step(List<BaseHero> mySide, List<BaseHero> enemySide){
 //        если не труп, то state = "Stand";
-        if (!this.state.equals("Die")) this.state = "Stand";
+        if (!this.state.equals("Die")) {
+            this.state = "Stand";
+            return true;
+        };
+        return false;
     }
 }

@@ -15,13 +15,13 @@ public abstract class Shooter extends BaseHero{
        return super.getInfo();
     }
 
-    public void step(List<BaseHero> mySide, List<BaseHero> enemySide){
+    public boolean step(List<BaseHero> mySide, List<BaseHero> enemySide){
 //        Если жизнь равна нулю или стрел нет, завершить обработку.
-        if (this.state.equals("Die") || this.shots <= 0) return;
+        if (this.state.equals("Die") || this.shots <= 0) return false;
 
 //      Поиск среди противников наиболее приближённого.
         BaseHero enemyTarget = this.findClosest(enemySide);
-        if (enemyTarget == null) return;
+        if (enemyTarget == null) return true;
 
 //        Нанести среднее повреждение найденному противнику.
         float damage = (enemyTarget.defense - attack) > 0 ? minDamage : (enemyTarget.defense - attack) < 0 ? maxDamage : (minDamage + maxDamage) / 2;
@@ -39,11 +39,12 @@ public abstract class Shooter extends BaseHero{
             if (hero instanceof Peasant && hero.state.equals("Stand")) {
                 hero.state = "Busy";
                 System.out.println("found peasant "+ hero.getName());
-                return;
+                return true;
             }
         }
         this.shots--;
         System.out.println("shots after shooter step " + this.shots);
+        return true;
     }
 
     @Override

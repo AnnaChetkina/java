@@ -15,10 +15,10 @@ public abstract class Healer extends BaseHero {
     }
 
 
-    public void step(List<BaseHero> mySide, List<BaseHero> enemySide){
+    public boolean step(List<BaseHero> mySide, List<BaseHero> enemySide){
 //       пробежаться по всем своим, если среди своих встретился первый попавшийся с повреждением
 //       (здоровье меньше максимального), его надо вылечить.
-        if (this.state.equals("Die") || this.magic <= 0) return;
+        if (this.state.equals("Die") || this.magic <= 0) return false;
 
         for (BaseHero hero: mySide) {
 //            System.out.println(hero.hp + "/" + hero.maxHp);
@@ -31,9 +31,10 @@ public abstract class Healer extends BaseHero {
                         + "; state = " + hero.getState()
                 );
                 this.magic--;
-                return;
+                return true;
             }
         }
 
+        return true;
     }
 }
